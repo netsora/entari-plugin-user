@@ -1,0 +1,37 @@
+# $schema: .lang.schema.json
+
+authority:
+  success: 用户数据已修改
+  low_authority: 权限不足
+
+bind:
+  generated_1: |-
+    Bind 指令可用于在多个平台间绑定用户数据。绑定过程中，原始平台的用户数据将完全保留，而目标平台的用户数据将被原始平台的数据所覆盖。
+    请确认当前平台是你的目标平台，并在 5 分钟内使用你的账号在原始平台内向机器人发送以下文本：
+    /bind {token}
+    绑定完成后，你可以随时使用「bind -r」来解除绑定状态
+  generated_2: |-
+    令牌核验成功！下面将进行第二步操作。
+    请在 5 分钟内使用你的账号在目标平台内向机器人发送以下文本：
+    /bind {token}
+    注意：当前平台是你的原始平台，这里的用户数据将覆盖目标平台的数据
+  expire: 令牌不存在或已过期
+  same_account: 请使用最开始要绑定账号进行操作
+  success: 账号绑定成功！
+  remove_success: 账号解绑成功！
+  remove_original: 无法解除绑定：这是你的原始账号
+  list: |-
+    当前账号绑定列表：
+    {list}
+  no_accounts: 当前没有绑定任何账号
+
+user:
+  message: |-
+    平台名：{platform}
+    平台ID：{platform_id}
+    用户名：{user_name}
+    创建日期：{created_at}
+
+  rename:
+    duplicate: 禁止与其他用户重名
+    updated: 好的，{name}，请多指教！

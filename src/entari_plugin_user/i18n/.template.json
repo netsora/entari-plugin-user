@@ -1,0 +1,39 @@
+{
+  "$schema": ".template.schema.json",
+  "scopes": [
+    {
+      "scope": "authority",
+      "types": [
+        "success",
+        "low_authority"
+      ]
+    },
+    {
+      "scope": "bind",
+      "types": [
+        "generated_1",
+        "generated_2",
+        "expire",
+        "same_account",
+        "success",
+        "remove_success",
+        "remove_original",
+        "list",
+        "no_accounts"
+      ]
+    },
+    {
+      "scope": "user",
+      "types": [
+        "message",
+        {
+          "subtype": "rename",
+          "types": [
+            "duplicate",
+            "updated"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "title": "Lang Schema",
+  "description": "Schema for lang file",
+  "type": "object",
+  "properties": {
+    "authority": {
+      "title": "Authority",
+      "description": "Scope 'authority' of lang item",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "success": {
+          "title": "success",
+          "description": "value of lang item type 'success'",
+          "type": "string"
+        },
+        "low_authority": {
+          "title": "low_authority",
+          "description": "value of lang item type 'low_authority'",
+          "type": "string"
+        }
+      }
+    },
+    "bind": {
+      "title": "Bind",
+      "description": "Scope 'bind' of lang item",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "generated_1": {
+          "title": "generated_1",
+          "description": "value of lang item type 'generated_1'",
+          "type": "string"
+        },
+        "generated_2": {
+          "title": "generated_2",
+          "description": "value of lang item type 'generated_2'",
+          "type": "string"
+        },
+        "expire": {
+          "title": "expire",
+          "description": "value of lang item type 'expire'",
+          "type": "string"
+        },
+        "same_account": {
+          "title": "same_account",
+          "description": "value of lang item type 'same_account'",
+          "type": "string"
+        },
+        "success": {
+          "title": "success",
+          "description": "value of lang item type 'success'",
+          "type": "string"
+        },
+        "remove_success": {
+          "title": "remove_success",
+          "description": "value of lang item type 'remove_success'",
+          "type": "string"
+        },
+        "remove_original": {
+          "title": "remove_original",
+          "description": "value of lang item type 'remove_original'",
+          "type": "string"
+        },
+        "list": {
+          "title": "list",
+          "description": "value of lang item type 'list'",
+          "type": "string"
+        },
+        "no_accounts": {
+          "title": "no_accounts",
+          "description": "value of lang item type 'no_accounts'",
+          "type": "string"
+        }
+      }
+    },
+    "user": {
+      "title": "User",
+      "description": "Scope 'user' of lang item",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "message": {
+          "title": "message",
+          "description": "value of lang item type 'message'",
+          "type": "string"
+        },
+        "rename": {
+          "title": "Rename",
+          "description": "Scope 'rename' of lang item",
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "duplicate": {
+              "title": "duplicate",
+              "description": "value of lang item type 'duplicate'",
+              "type": "string"
+            },
+            "updated": {
+              "title": "updated",
+              "description": "value of lang item type 'updated'",
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
