@@ -37,6 +37,6 @@ async def rename_(name: str, session: UserSession):
     try:
         await set_user_name(session.user_id, name)
     except IntegrityError:
-        await session.session.send(Lang.user.rename.updated())
+        await session.session.send(Lang.user.rename.updated(name=name))
     else:
         await session.session.send(Lang.user.rename.duplicate())
