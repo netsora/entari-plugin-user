@@ -12,7 +12,7 @@ from .utils import get_user_by_id as get_user_by_id
 metadata(
     name="用户",
     author=[{"name": "KomoriDev", "email": "mute231010@gmail.com"}],
-    version="0.1.5",
+    version="0.1.6",
     description="管理和绑定不同平台的用户",
     readme="README.md",
     config=Config,

@@ -1,6 +1,6 @@
 [project]
 name = "entari-plugin-user"
-version = "0.1.5"
+version = "0.1.6"
 description = "Entari 用户插件"
 authors = [
     { name = "KomoriDev ", email = "mute231010@gmail.com" },
