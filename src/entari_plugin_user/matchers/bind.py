@@ -1,14 +1,14 @@
 from expiringdictx import ExpiringDict
 
 from arclet.alconna import Alconna, CommandMeta, Args, Option
-from arclet.entari import command, ChannelType
+from arclet.entari import command, Account, ChannelType
 
 from ..i18n import Lang
 from ..annotated import UserSession
 from .utils import generate_token, get_bind_list
 from ..utils import get_user, set_bind, remove_bind
 
-tokens = ExpiringDict[str, tuple[str, str, int, ChannelType | None]](
+tokens = ExpiringDict[str, tuple[str, str, int, Account, ChannelType | None]](
     capacity=100, default_age=300
 )
 
@@ -35,6 +35,7 @@ async def _(token: command.Match[str], session: UserSession):
             session.platform,
             session.platform_id,
             session.user_id,
+            session.internal.account,
             session.channel_type,
         )
         await session.send(Lang.bind.generated_1(token=token.result))
@@ -45,18 +46,24 @@ async def _(token: command.Match[str], session: UserSession):
         await session.send(Lang.bind.expire())
         return
 
-    platform, platform_id, user_id, channel_type = bind_info
+    platform, platform_id, user_id, account, channel_type = bind_info
 
     if channel_type is not None and channel_type != ChannelType.DIRECT:
         token.result = generate_token()
-        tokens[token.result] = (session.platform, session.platform_id, user_id, None)
+        tokens[token.result] = (
+            session.platform,
+            session.platform_id,
+            user_id,
+            session.internal.account,
+            None,
+        )
         await session.send(Lang.bind.generated_2(token=token.result))
     elif channel_type is None:
-        if session.user_id != user_id:  # session.user_id=1 user_id=1
+        if session.user_id != user_id:
             await session.send(Lang.bind.same_account())
             return
 
-        platform_user = await session.internal.user_get(platform_id)
+        platform_user = await account.user_get(platform_id)
         user = await get_user(platform, platform_user)
         await set_bind(session.platform, session.platform_id, user.id)
         await session.send(Lang.bind.success())
