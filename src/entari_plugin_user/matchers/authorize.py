@@ -1,13 +1,13 @@
 from expiringdictx import ExpiringDict
 from arclet.alconna import Alconna, CommandMeta, Args, Option
-from arclet.entari import command, At, propagate
+from arclet.entari import command, At
 
 from .utils import generate_token
 
 from ..i18n import Lang
 from ..log import logger
 from ..annotated import UserSession
-from ..filters import Authorization
+from ..filters import authorization
 from ..utils import get_user, set_user_authority
 
 tokens = ExpiringDict[str, int](capacity=100, default_age=300)
@@ -29,7 +29,7 @@ authorize_disp = command.mount(authorize_alc)
 
 
 @authorize_disp.assign("user")
-@propagate(Authorization(4))
+@authorization(4)
 async def authorize_(value: int | None, user: At, session: UserSession):
     if value is None or user.id is None:
         return

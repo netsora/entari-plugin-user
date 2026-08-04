@@ -80,15 +80,15 @@ async def _(session: UserSession):
 
 ```py
 from arclet.entari import command, propagate
-from entari_plugin_user import Authorization, only_superuser  # entari:plugin
+from entari_plugin_user import authorization, superusers  # entari:plugin
 
 @command.on("ban")
-@propagate(Authorization(3))
+@authorization(3)
 async def _ban():
     ...
 
 @command.on("sudo")
-@only_superuser
+@superusers
 async def _sudo():
     ...
 ```
