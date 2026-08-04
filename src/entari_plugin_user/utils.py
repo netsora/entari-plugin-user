@@ -5,6 +5,7 @@ from arclet.entari import User as UserModel
 from entari_plugin_database import AsyncSession, get_session
 
 from .models import User, Bind
+from .superusers import sync_entari_superusers
 
 
 _insert_mutex: asyncio.Lock | None = None
@@ -114,6 +115,8 @@ async def set_user_authority(user_id: int, authority: int) -> None:
         user.authority = authority
         await db_session.commit()
 
+    await sync_entari_superusers()
+
 
 async def set_bind(platform: str, platform_id: str, user_id: int) -> None:
     async with get_session() as db_session:
@@ -127,9 +130,11 @@ async def set_bind(platform: str, platform_id: str, user_id: int) -> None:
 
         if not bind:
             raise ValueError("找不到用户信息")
-        else:
-            bind.bind_id = user_id
-            await db_session.commit()
+
+        bind.bind_id = user_id
+        await db_session.commit()
+
+    await sync_entari_superusers()
 
 
 async def remove_bind(platform: str, platform_id: str) -> bool:
@@ -147,7 +152,9 @@ async def remove_bind(platform: str, platform_id: str) -> bool:
 
         if bind.bind_id == bind.original_id:
             return False
-        else:
-            bind.bind_id = bind.original_id
-            await db_session.commit()
-            return True
+
+        bind.bind_id = bind.original_id
+        await db_session.commit()
+
+    await sync_entari_superusers()
+    return True

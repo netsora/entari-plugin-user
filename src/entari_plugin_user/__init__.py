@@ -1,4 +1,4 @@
-from arclet.entari import metadata
+from arclet.entari import ConfigReload, Ready, metadata, plugin
 
 from .config import Config
 from .annotated import User as User
@@ -8,6 +8,7 @@ from .filters import only_superuser as only_superuser
 from .filters import Authorization as Authorization
 from .utils import get_user as get_user
 from .utils import get_user_by_id as get_user_by_id
+from .superusers import preserve_configured_superusers, sync_entari_superusers
 
 metadata(
     name="用户",
@@ -17,6 +18,21 @@ metadata(
     readme="README.md",
     config=Config,
 )
+
+
+@plugin.listen(Ready)
+async def _sync_entari_superusers_on_ready():
+    await sync_entari_superusers()
+
+
+@plugin.listen(ConfigReload)
+async def _sync_entari_superusers_on_config_reload(event: ConfigReload):
+    if event.scope != "basic" or event.key != "superusers":
+        return
+
+    preserve_configured_superusers(event.value)
+    await sync_entari_superusers()
+
 
 __all__ = [
     "get_user",
