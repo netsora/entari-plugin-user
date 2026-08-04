@@ -1,4 +1,5 @@
-from arclet.entari import ConfigReload, Ready, metadata, plugin
+from arclet.entari import MessageChain, ConfigReload, Ready, metadata, plugin
+from arclet.entari.event.command import CommandReceive
 
 from .config import Config
 from .annotated import User as User
@@ -18,6 +19,12 @@ metadata(
     readme="README.md",
     config=Config,
 )
+
+
+@plugin.listen(CommandReceive, priority=0)
+async def _ignore_blacklisted_commands(user: User):
+    if user.authority == 0:
+        return MessageChain()
 
 
 @plugin.listen(Ready)

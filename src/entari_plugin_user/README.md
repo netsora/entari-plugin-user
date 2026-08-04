@@ -48,6 +48,7 @@ uv add entari-plugin-user
 > 本项目的权限管理了参考 [Koishi](https://koishi.chat/zh-CN/manual/usage/customize.html#%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86) 的方案  
 > 我们也推荐开发者按照其标准进行管理  
 >
+> - 0 级：黑名单用户，机器人不会响应其指令
 > - 1 级：所有用户，只能够接触有限的功能  
 > - 2 级：高级用户，能够接触几乎一切机器人的功能  
 > - 3 级：管理员，能够直接操作机器人事务  
