@@ -13,7 +13,7 @@ from .superusers import preserve_configured_superusers, sync_entari_superusers
 metadata(
     name="用户",
     author=[{"name": "KomoriDev", "email": "mute231010@gmail.com"}],
-    version="0.1.6",
+    version="0.2.0",
     description="管理和绑定不同平台的用户",
     readme="README.md",
     config=Config,
